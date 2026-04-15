@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q10 - Cadastro com Validação</title>
+</head>
+<body>
+    <h1>Questão 10 - Cadastro de Pessoa com Validação</h1>
+    <p>Veja o console do navegador (F12) para ver os resultados.</p>
+
+    <script>
+        // Funções de validação
+        function validarNome(nome) {
+            if (typeof nome !== "string" || nome.trim() === "") {
+                throw "Erro: nome deve ser uma string não vazia!";
+            }
+            return nome;
+        }
+
+        function validarIdade(idade) {
+            let idadeNum = parseInt(idade);
+            if (!Number.isInteger(idadeNum) || idadeNum < 0 || idadeNum > 150) {
+                throw "Erro: idade deve ser um número inteiro entre 0 e 150!";
+            }
+            return idadeNum;
+        }
+
+        function validarFoiADisney(resposta) {
+            if (resposta.toLowerCase() === "sim" || resposta.toLowerCase() === "s") {
+                return true;
+            } else if (resposta.toLowerCase() === "não" || resposta.toLowerCase() === "nao" || resposta.toLowerCase() === "n") {
+                return false;
+            } else {
+                throw "Erro: digite 'sim' ou 'não'!";
+            }
+        }
+
+        // Variáveis para armazenar dados válidos
+        let nome = null;
+        let idade = null;
+        let jaFoiADisney = null;
+
+        // Solicitar nome
+        while (nome === null) {
+            try {
+                let entrada = prompt("Digite o nome:");
+                nome = validarNome(entrada);
+            } catch (erro) {
+                alert(erro);
+            }
+        }
+
+        // Solicitar idade
+        while (idade === null) {
+            try {
+                let entrada = prompt("Digite a idade:");
+                idade = validarIdade(entrada);
+            } catch (erro) {
+                alert(erro);
+            }
+        }
+
+        // Solicitar se foi à Disney
+        while (jaFoiADisney === null) {
+            try {
+                let entrada = prompt("Já foi à Disney? (sim/não):");
+                jaFoiADisney = validarFoiADisney(entrada);
+            } catch (erro) {
+                alert(erro);
+            }
+        }
+
+        // Criar objeto com dados válidos
+        let pessoa = {
+            nome: nome,
+            idade: idade,
+            ja_foi_a_Disney: jaFoiADisney
+        };
+
+        // Exibir dados
+        console.log("Dados cadastrados:");
+        console.log(pessoa);
+        alert("Cadastro realizado com sucesso!\nNome: " + pessoa.nome + "\nIdade: " + pessoa.idade + "\nJá foi à Disney: " + pessoa.ja_foi_a_Disney);
+    </script>
+</body>
+</html>
