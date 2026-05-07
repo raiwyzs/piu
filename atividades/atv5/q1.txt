@@ -1,0 +1,14 @@
+Quando você declara uma constante com const, você está dizendo que o ENDEREÇO
+(referência) da variável não pode mudar. Mas os valores DENTRO do objeto podem
+ser alterados sim!
+
+Pense assim:
+- const pessoa = {...}  → pessoa sempre aponta para o MESMO objeto
+- pessoa.nome = 'novo'  → você está mudando o CONTEÚDO do objeto, não a referência
+
+É como se a const fosse a placa de uma casa. A placa não pode ser removida ou
+trocada de lugar (isso é const), mas você pode redecorar o interior da casa à vontade!
+
+Se você tentasse fazer: pessoa = {} ← Isso SIM daria erro!
+
+Porque aí você estaria tentando mudar o endereço para o qual pessoa aponta.

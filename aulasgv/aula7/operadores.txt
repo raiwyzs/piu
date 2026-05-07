@@ -1,0 +1,20 @@
++ = soma
+- = subtração
+* = multiplicação
+/ = divisão
+% = divisão inteira (resto da divisão) se tiver 5%2 a resposta vai ser 1, porque o que sobra embaixo do 5 na hora de dividir é 1 
+** = potencia
+
+ORDEM DE PRECEDÊNCIA
+1.()
+2.**
+3. *  /   %
+4. +    -
+
+OPERADORES RELACIONAIS
+>
+<
+>=
+<=
+==
+!=
