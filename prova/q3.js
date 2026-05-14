@@ -1,46 +1,55 @@
-Questão 3 — Controle de Biblioteca
+/* Questão 3 — Controle de Biblioteca
 Crie um sistema que:
 • adiciona livros
 • empresta livros
 • impede empréstimo sem estoque
-• registra operações
-Resposta Comentada:
+• registra operações */
+
 class Biblioteca {
- constructor() {
- this.livros = []
- this.registros = []
- }
- adicionar(livro) {
- // Procura livro existente
- const existente = this.livros.find(
- l => l.id === livro.id
- )
- // Se existir, soma quantidade
- if (existente) {
- existente.quantidade += livro.quantidade
- } else {
- // Caso contrário adiciona novo
- this.livros.push(livro)
- }
- this.registros.push(
- `Adicionou ${livro.quantidade} livros`
- )
- }
- emprestar(id) {
- const livro = this.livros.find(
- l => l.id === id
- )
- // Verifica existência
- if (!livro) {
- throw new Error("Livro não encontrado")
- }
- // Verifica estoque
- if (livro.quantidade <= 0) {
- throw new Error("Sem estoque")
- }
- livro.quantidade--
- this.registros.push(
- `Emprestou livro #${id}`
- )
- }
+    constructor() {
+        // Inicializa a lista de livros como array vazio
+        this.livros = [];
+        // Inicializa os registros de operações como array vazio
+        this.registros = [];
+    }
+
+    adicionar(livro) {
+        // Procura um livro existente pelo mesmo ID
+        const existente = this.livros.find(
+            l => l.id === livro.id
+        );
+
+        // Se já existe, aumenta a quantidade disponível
+        if (existente) {
+            existente.quantidade += livro.quantidade;
+        } else {
+            // Caso contrário, adiciona o novo livro ao estoque
+            this.livros.push(livro);
+        }
+
+        // Registra a operação de adição no histórico
+        this.registros.push(`Adicionou ${livro.quantidade} livros`);
+    }
+
+    emprestar(id) {
+        // Busca o livro pelo ID solicitado
+        const livro = this.livros.find(
+            l => l.id === id
+        );
+
+        // Verifica se o livro existe na biblioteca
+        if (!livro) {
+            throw new Error("Livro não encontrado");
+        }
+
+        // Verifica se há estoque disponível para empréstimo
+        if (livro.quantidade <= 0) {
+            throw new Error("Sem estoque");
+        }
+
+        // Reduz a quantidade do livro emprestado
+        livro.quantidade--;
+        // Registra a operação de empréstimo no histórico
+        this.registros.push(`Emprestou livro #${id}`);
+    }
 }

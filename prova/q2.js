@@ -1,44 +1,51 @@
-/*Questão 2 — Sistema Bancário
+/* Questão 2 — Sistema Bancário
 Crie uma classe ContaBancaria com:
 • saldo
 • depositar()
 • sacar()
-• histórico de operações
-Resposta Comentada:*/
+• histórico de operações */
+
 class ContaBancaria {
     constructor() {
-        // Saldo inicial
-        this.saldo = 0
-        // Guarda registros das operações
-        this.historico = []
+        // Inicializa o saldo com zero
+        this.saldo = 0;
+        // Inicializa o histórico de operações como array vazio
+        this.historico = [];
     }
+
     depositar(valor) {
-        // Soma ao saldo
-        this.saldo += valor
-        // Registra operação
-        this.historico.push(
-        `Depositou R$${valor}`
-        )
+        // Adiciona o valor ao saldo atual
+        this.saldo += valor;
+        // Registra a operação de depósito no histórico
+        this.historico.push(`Depositou R$${valor}`);
     }
+
     sacar(valor) {
-    // Verifica se há saldo suficiente
-    if (valor > this.saldo) {
-    throw new Error("Saldo insuficiente")
+        // Verifica se o valor solicitado pode ser sacado
+        if (valor > this.saldo) {
+            throw new Error("Saldo insuficiente");
+        }
+        // Subtrai o valor do saldo
+        this.saldo -= valor;
+        // Registra a operação de saque no histórico
+        this.historico.push(`Sacou R$${valor}`);
     }
-    // Remove saldo
-    this.saldo -= valor
-    // Registra operação
-    this.historico.push(
-    `Sacou R$${valor}`
-    )
-  }
 }
-const conta = new ContaBancaria()
-conta.depositar(500)
+
+// Cria uma nova conta bancária
+const conta = new ContaBancaria();
+// Depósito de R$500 na conta
+conta.depositar(500);
+
 try {
- conta.sacar(200)
- conta.sacar(400)
+    // Tenta sacar R$200 da conta
+    conta.sacar(200);
+    // Tenta sacar R$400 da conta, pode gerar erro se saldo insuficiente
+    conta.sacar(400);
 } catch (erro) {
- console.log(erro.message)
+    // Exibe mensagem de erro caso não haja saldo suficiente
+    console.log(erro.message);
 }
-console.log(conta)
+
+// Mostra o estado atual da conta no console
+console.log(conta);
