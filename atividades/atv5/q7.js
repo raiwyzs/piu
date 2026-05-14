@@ -1,5 +1,6 @@
+    
 
-
+// Classe base Animal com método falar genérico
 class Animal {
     constructor(nome) {
         this.nome = nome
@@ -11,6 +12,7 @@ class Animal {
 }
 
 
+// Classe Cachorro que estende Animal e sobrescreve o método falar
 class Cachorro extends Animal {
     constructor(nome) {
         super(nome)
@@ -32,6 +34,7 @@ class BemTeVi extends Animal {
     }
 }
 
+// Instâncias de exemplo
 const dog = new Cachorro("Rex")
 const passaro = new BemTeVi("Zé")
 

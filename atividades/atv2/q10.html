@@ -11,6 +11,7 @@
 
     <script>
         // Funções de validação
+        // Valida se o nome é uma string não vazia
         function validarNome(nome) {
             if (typeof nome !== "string" || nome.trim() === "") {
                 throw "Erro: nome deve ser uma string não vazia!";
@@ -18,6 +19,7 @@
             return nome;
         }
 
+        // Valida a idade: converte para inteiro e verifica intervalo válido
         function validarIdade(idade) {
             let idadeNum = parseInt(idade);
             if (!Number.isInteger(idadeNum) || idadeNum < 0 || idadeNum > 150) {
@@ -26,32 +28,36 @@
             return idadeNum;
         }
 
+        // Valida resposta textual para saber se já foi à Disney
         function validarFoiADisney(resposta) {
+            // Aceita variações como 'sim', 's', 'não', 'nao', 'n'
             if (resposta.toLowerCase() === "sim" || resposta.toLowerCase() === "s") {
                 return true;
             } else if (resposta.toLowerCase() === "não" || resposta.toLowerCase() === "nao" || resposta.toLowerCase() === "n") {
                 return false;
             } else {
+                // Caso não reconheça a resposta, lança erro
                 throw "Erro: digite 'sim' ou 'não'!";
             }
         }
 
-        // Variáveis para armazenar dados válidos
+        // Variáveis para armazenar dados válidos (inicialmente null para indicar ausência)
         let nome = null;
         let idade = null;
         let jaFoiADisney = null;
 
-        // Solicitar nome
+        // Solicita o nome até receber uma entrada válida
         while (nome === null) {
             try {
                 let entrada = prompt("Digite o nome:");
                 nome = validarNome(entrada);
             } catch (erro) {
+                // Mostra alerta ao usuário em caso de entrada inválida
                 alert(erro);
             }
         }
 
-        // Solicitar idade
+        // Solicita a idade até receber uma entrada válida
         while (idade === null) {
             try {
                 let entrada = prompt("Digite a idade:");
@@ -61,7 +67,7 @@
             }
         }
 
-        // Solicitar se foi à Disney
+        // Solicita se já foi à Disney até receber resposta válida
         while (jaFoiADisney === null) {
             try {
                 let entrada = prompt("Já foi à Disney? (sim/não):");
@@ -71,14 +77,14 @@
             }
         }
 
-        // Criar objeto com dados válidos
+        // Cria um objeto com os dados validados
         let pessoa = {
             nome: nome,
             idade: idade,
             ja_foi_a_Disney: jaFoiADisney
         };
 
-        // Exibir dados
+        // Exibe os dados no console e mostra um alerta de confirmação
         console.log("Dados cadastrados:");
         console.log(pessoa);
         alert("Cadastro realizado com sucesso!\nNome: " + pessoa.nome + "\nIdade: " + pessoa.idade + "\nJá foi à Disney: " + pessoa.ja_foi_a_Disney);
